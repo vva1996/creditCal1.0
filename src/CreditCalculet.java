@@ -1,17 +1,24 @@
 public class CreditCalculet {
     private double personSum;
-    public double calculat(double sumData, double montMonData, double persentData, String personData) {
+    private double sumCredit;
+    private double personSumYear;
+
+    public double countCredit(CreditData creditData) {
         PersentFirstYear persentFirstYear = new PersentFirstYear();
-        if (sumData < 0 || persentFirstYear.getPersentFirstYear(sumData, montMonData, persentData,
-                personData) > (montMonData * 12) || (!(personData.equals("business")) &&
-                (!personData.equals("human")))) {                                                          // Сумма кредита не отрицательная
+        if (creditData.getSumD() < 0 || persentFirstYear.getPersentFirstYear(creditData.getSumD(),
+                creditData.getMontmonD(), creditData.getPersentD(),
+                creditData.getPerson()) > (creditData.getMontmonD() * 12) ||
+                (!(creditData.getPerson().equals("business")) && (!creditData.getPerson().equals("human")))) {                                                          // Сумма кредита не отрицательная
             throw new IllegalArgumentException();
-        } else if (personData.equals("business")) {
-            sumData = sumData - montMonData * 12;
+        } else if (creditData.getPerson().equals("business")) {
+            sumCredit = creditData.getSumD() - creditData.getMontmonD() * 12;
+        } else {
+            sumCredit = creditData.getSumD();
         }
-        while (sumData > 0) {
-            personSum = personSum + sumData * persentData / 100;
-            sumData = sumData - montMonData * 12 + personSum;
+        while (sumCredit > 0) {
+            personSum = personSum + sumCredit * creditData.getPersentD() / 100;
+            personSumYear = sumCredit * creditData.getPersentD() / 100;
+            sumCredit = sumCredit - creditData.getMontmonD() * 12 + personSumYear;
         }
         return personSum;
     }

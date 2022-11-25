@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -12,7 +13,6 @@ public class Main {
         creditData.setMontmonD(Double.parseDouble(cond[1]));                  // Записывает Информацию в CreditData
         creditData.setPersentD(Double.parseDouble(cond[2]));
         creditData.setPerson(cond[3]);
-        System.out.println(creditCalculet.calculat(creditData.getSumD(),creditData.getMontmonD(),
-                creditData.getPersentD(),creditData.getPerson()));
+        System.out.println(creditCalculet.countCredit(creditData));
     }
 }
